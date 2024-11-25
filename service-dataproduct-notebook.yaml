@@ -1,0 +1,57 @@
+﻿kind: Service
+apiVersion: v1
+metadata:
+  name: dataproduct-notebook
+  namespace: datamesh-demo
+  uid: fc2ddb7a-3661-4980-9803-0065ad2052fa
+  resourceVersion: '70916031'
+  creationTimestamp: '2024-06-02T02:55:29Z'
+  managedFields:
+    - manager: Mozilla
+      operation: Update
+      apiVersion: v1
+      time: '2024-06-02T02:55:29Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:spec':
+          'f:internalTrafficPolicy': {}
+          'f:ports':
+            .: {}
+            'k:{"port":4040,"protocol":"TCP"}':
+              .: {}
+              'f:name': {}
+              'f:port': {}
+              'f:protocol': {}
+              'f:targetPort': {}
+            'k:{"port":4041,"protocol":"TCP"}':
+              .: {}
+              'f:name': {}
+              'f:port': {}
+              'f:protocol': {}
+              'f:targetPort': {}
+          'f:selector': {}
+          'f:sessionAffinity': {}
+          'f:type': {}
+spec:
+  clusterIP: 172.30.229.177
+  ipFamilies:
+    - IPv4
+  ports:
+    - name: 4040-tcp
+      protocol: TCP
+      port: 4040
+      targetPort: 4040
+    - name: 4041-tcp
+      protocol: TCP
+      port: 4041
+      targetPort: 4041
+  internalTrafficPolicy: Cluster
+  clusterIPs:
+    - 172.30.229.177
+  type: ClusterIP
+  ipFamilyPolicy: SingleStack
+  sessionAffinity: None
+  selector:
+    app: dataproduct-notebook
+status:
+  loadBalancer: {}

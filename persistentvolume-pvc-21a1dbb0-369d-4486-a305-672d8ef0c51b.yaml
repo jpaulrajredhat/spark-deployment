@@ -1,0 +1,103 @@
+﻿kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: pvc-21a1dbb0-369d-4486-a305-672d8ef0c51b
+  uid: bb8d1aba-ac42-49b1-a6ad-bb77fdb18bec
+  resourceVersion: '70911451'
+  creationTimestamp: '2024-06-02T02:49:51Z'
+  annotations:
+    pv.kubernetes.io/provisioned-by: ebs.csi.aws.com
+    volume.kubernetes.io/provisioner-deletion-secret-name: ''
+    volume.kubernetes.io/provisioner-deletion-secret-namespace: ''
+  finalizers:
+    - kubernetes.io/pv-protection
+    - external-attacher/ebs-csi-aws-com
+  managedFields:
+    - manager: csi-provisioner
+      operation: Update
+      apiVersion: v1
+      time: '2024-06-02T02:49:51Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:annotations':
+            .: {}
+            'f:pv.kubernetes.io/provisioned-by': {}
+            'f:volume.kubernetes.io/provisioner-deletion-secret-name': {}
+            'f:volume.kubernetes.io/provisioner-deletion-secret-namespace': {}
+        'f:spec':
+          'f:accessModes': {}
+          'f:capacity':
+            .: {}
+            'f:storage': {}
+          'f:claimRef':
+            .: {}
+            'f:apiVersion': {}
+            'f:kind': {}
+            'f:name': {}
+            'f:namespace': {}
+            'f:resourceVersion': {}
+            'f:uid': {}
+          'f:csi':
+            .: {}
+            'f:driver': {}
+            'f:fsType': {}
+            'f:volumeAttributes':
+              .: {}
+              'f:storage.kubernetes.io/csiProvisionerIdentity': {}
+            'f:volumeHandle': {}
+          'f:nodeAffinity':
+            .: {}
+            'f:required': {}
+          'f:persistentVolumeReclaimPolicy': {}
+          'f:storageClassName': {}
+          'f:volumeMode': {}
+    - manager: kube-controller-manager
+      operation: Update
+      apiVersion: v1
+      time: '2024-06-02T02:49:51Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:status':
+          'f:phase': {}
+      subresource: status
+    - manager: csi-attacher
+      operation: Update
+      apiVersion: v1
+      time: '2024-06-02T02:49:52Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:finalizers':
+            'v:"external-attacher/ebs-csi-aws-com"': {}
+spec:
+  capacity:
+    storage: 30Gi
+  csi:
+    driver: ebs.csi.aws.com
+    volumeHandle: vol-05011b7bd189cff70
+    fsType: ext4
+    volumeAttributes:
+      storage.kubernetes.io/csiProvisionerIdentity: 1711115017751-8081-ebs.csi.aws.com
+  accessModes:
+    - ReadWriteOnce
+  claimRef:
+    kind: PersistentVolumeClaim
+    namespace: datamesh-demo
+    name: dataproductworkspace
+    uid: 21a1dbb0-369d-4486-a305-672d8ef0c51b
+    apiVersion: v1
+    resourceVersion: '70911382'
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: gp3
+  volumeMode: Filesystem
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: topology.ebs.csi.aws.com/zone
+              operator: In
+              values:
+                - us-east-2a
+status:
+  phase: Bound

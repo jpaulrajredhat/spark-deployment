@@ -1,0 +1,50 @@
+﻿kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: spark-events-pv
+  uid: e76628f6-0486-41e6-87ee-bdaf73d5d4c5
+  resourceVersion: '52831747'
+  creationTimestamp: '2024-05-17T20:26:10Z'
+  finalizers:
+    - kubernetes.io/pv-protection
+  managedFields:
+    - manager: Mozilla
+      operation: Update
+      apiVersion: v1
+      time: '2024-05-17T20:26:10Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:spec':
+          'f:accessModes': {}
+          'f:capacity':
+            .: {}
+            'f:storage': {}
+          'f:nfs':
+            .: {}
+            'f:path': {}
+            'f:server': {}
+          'f:persistentVolumeReclaimPolicy': {}
+          'f:storageClassName': {}
+          'f:volumeMode': {}
+    - manager: kube-controller-manager
+      operation: Update
+      apiVersion: v1
+      time: '2024-05-17T20:26:10Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:status':
+          'f:phase': {}
+      subresource: status
+spec:
+  capacity:
+    storage: 10Gi
+  nfs:
+    server: 172.17.0.2
+    path: /tmp
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: slow
+  volumeMode: Filesystem
+status:
+  phase: Available

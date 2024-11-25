@@ -1,0 +1,62 @@
+﻿kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: dataproduct-notebook
+  namespace: datamesh-demo
+  uid: 0ffedaf4-5996-4454-a1d6-230c1f609040
+  resourceVersion: '70918690'
+  creationTimestamp: '2024-06-02T02:57:00Z'
+  annotations:
+    openshift.io/host.generated: 'true'
+  managedFields:
+    - manager: openshift-router
+      operation: Update
+      apiVersion: route.openshift.io/v1
+      time: '2024-06-02T02:57:00Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:status':
+          'f:ingress': {}
+      subresource: status
+    - manager: Mozilla
+      operation: Update
+      apiVersion: route.openshift.io/v1
+      time: '2024-06-02T02:58:42Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:spec':
+          'f:port':
+            .: {}
+            'f:targetPort': {}
+          'f:tls':
+            .: {}
+            'f:insecureEdgeTerminationPolicy': {}
+            'f:termination': {}
+          'f:to':
+            'f:kind': {}
+            'f:name': {}
+            'f:weight': {}
+          'f:wildcardPolicy': {}
+spec:
+  host: dataproduct-notebook-datamesh-demo.apps.rosa-8grhg.ssnp.p1.openshiftapps.com
+  to:
+    kind: Service
+    name: dataproduct-notebook
+    weight: 100
+  port:
+    targetPort: 4041-tcp
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: None
+  wildcardPolicy: None
+status:
+  ingress:
+    - host: >-
+        dataproduct-notebook-datamesh-demo.apps.rosa-8grhg.ssnp.p1.openshiftapps.com
+      routerName: default
+      conditions:
+        - type: Admitted
+          status: 'True'
+          lastTransitionTime: '2024-06-02T02:57:00Z'
+      wildcardPolicy: None
+      routerCanonicalHostname: router-default.apps.rosa-8grhg.ssnp.p1.openshiftapps.com
