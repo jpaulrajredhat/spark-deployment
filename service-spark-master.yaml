@@ -1,0 +1,90 @@
+﻿kind: Service
+apiVersion: v1
+metadata:
+  name: spark-master
+  namespace: spark-datamesh-demo
+  uid: 73c4c6ac-e1e9-40d5-8d68-7ce2dc232df7
+  resourceVersion: '307178946'
+  creationTimestamp: '2024-11-25T21:01:23Z'
+  labels:
+    app: spark
+    component: master
+  managedFields:
+    - manager: Mozilla
+      operation: Update
+      apiVersion: v1
+      time: '2024-11-25T21:01:23Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:labels':
+            .: {}
+            'f:app': {}
+            'f:component': {}
+        'f:spec':
+          'f:clusterIPs': {}
+          'f:sessionAffinity': {}
+          'f:clusterIP': {}
+          'f:type': {}
+          'f:ipFamilyPolicy': {}
+          'f:selector': {}
+          'f:ipFamilies': {}
+          'f:internalTrafficPolicy': {}
+          'f:ports':
+            .: {}
+            'k:{"port":4040,"protocol":"TCP"}':
+              .: {}
+              'f:name': {}
+              'f:port': {}
+              'f:protocol': {}
+              'f:targetPort': {}
+            'k:{"port":7077,"protocol":"TCP"}':
+              .: {}
+              'f:name': {}
+              'f:port': {}
+              'f:protocol': {}
+              'f:targetPort': {}
+            'k:{"port":8080,"protocol":"TCP"}':
+              .: {}
+              'f:name': {}
+              'f:port': {}
+              'f:protocol': {}
+              'f:targetPort': {}
+            'k:{"port":15002,"protocol":"TCP"}':
+              .: {}
+              'f:name': {}
+              'f:port': {}
+              'f:protocol': {}
+              'f:targetPort': {}
+spec:
+  clusterIP: 172.30.128.211
+  ipFamilies:
+    - IPv4
+  ports:
+    - name: spark-master
+      protocol: TCP
+      port: 7077
+      targetPort: 7077
+    - name: spark-master-webui
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+    - name: spark-connector
+      protocol: TCP
+      port: 15002
+      targetPort: 15002
+    - name: spark-connector-ui
+      protocol: TCP
+      port: 4040
+      targetPort: 4040
+  internalTrafficPolicy: Cluster
+  clusterIPs:
+    - 172.30.128.211
+  type: ClusterIP
+  ipFamilyPolicy: SingleStack
+  sessionAffinity: None
+  selector:
+    app: spark
+    component: master
+status:
+  loadBalancer: {}

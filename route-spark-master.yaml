@@ -1,0 +1,82 @@
+﻿kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: spark-master
+  namespace: spark-datamesh-demo
+  uid: 1df87e7b-e615-4b69-92dd-1e44fe98c279
+  resourceVersion: '52891684'
+  creationTimestamp: '2024-05-17T21:42:32Z'
+  labels:
+    app: spark
+    component: master
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: >
+      {"apiVersion":"route.openshift.io/v1","kind":"Route","metadata":{"annotations":{},"labels":{"app":"spark","component":"master"},"name":"spark-master","namespace":"spark-datamesh-demo"},"spec":{"port":{"targetPort":"spark-master-webui"},"to":{"kind":"Service","name":"spark-master"}}}
+    openshift.io/host.generated: 'true'
+  managedFields:
+    - manager: kubectl-client-side-apply
+      operation: Update
+      apiVersion: route.openshift.io/v1
+      time: '2024-05-17T21:42:32Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:annotations':
+            .: {}
+            'f:kubectl.kubernetes.io/last-applied-configuration': {}
+          'f:labels':
+            .: {}
+            'f:app': {}
+            'f:component': {}
+        'f:spec':
+          'f:port':
+            .: {}
+            'f:targetPort': {}
+          'f:to':
+            'f:kind': {}
+            'f:name': {}
+            'f:weight': {}
+          'f:wildcardPolicy': {}
+    - manager: openshift-router
+      operation: Update
+      apiVersion: route.openshift.io/v1
+      time: '2024-05-17T21:42:32Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:status':
+          'f:ingress': {}
+      subresource: status
+    - manager: Mozilla
+      operation: Update
+      apiVersion: route.openshift.io/v1
+      time: '2024-05-17T21:43:17Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:spec':
+          'f:tls':
+            .: {}
+            'f:insecureEdgeTerminationPolicy': {}
+            'f:termination': {}
+spec:
+  host: spark-master-spark-datamesh-demo.apps.rosa-8grhg.ssnp.p1.openshiftapps.com
+  to:
+    kind: Service
+    name: spark-master
+    weight: 100
+  port:
+    targetPort: spark-master-webui
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: None
+  wildcardPolicy: None
+status:
+  ingress:
+    - host: >-
+        spark-master-spark-datamesh-demo.apps.rosa-8grhg.ssnp.p1.openshiftapps.com
+      routerName: default
+      conditions:
+        - type: Admitted
+          status: 'True'
+          lastTransitionTime: '2024-05-17T21:42:32Z'
+      wildcardPolicy: None
+      routerCanonicalHostname: router-default.apps.rosa-8grhg.ssnp.p1.openshiftapps.com

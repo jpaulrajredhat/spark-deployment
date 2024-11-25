@@ -1,0 +1,71 @@
+﻿kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: spark-connector
+  namespace: spark-datamesh-demo
+  uid: f597c7d6-6ca9-45ae-9494-dd2f6ea0a1c7
+  resourceVersion: '79173496'
+  creationTimestamp: '2024-06-08T21:06:03Z'
+  labels:
+    app: spark
+    component: master
+  annotations:
+    openshift.io/host.generated: 'true'
+  managedFields:
+    - manager: Mozilla
+      operation: Update
+      apiVersion: route.openshift.io/v1
+      time: '2024-06-08T21:06:03Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:labels':
+            .: {}
+            'f:app': {}
+            'f:component': {}
+        'f:spec':
+          'f:port':
+            .: {}
+            'f:targetPort': {}
+          'f:tls':
+            .: {}
+            'f:insecureEdgeTerminationPolicy': {}
+            'f:termination': {}
+          'f:to':
+            'f:kind': {}
+            'f:name': {}
+            'f:weight': {}
+          'f:wildcardPolicy': {}
+    - manager: openshift-router
+      operation: Update
+      apiVersion: route.openshift.io/v1
+      time: '2024-06-08T21:06:03Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:status':
+          'f:ingress': {}
+      subresource: status
+spec:
+  host: >-
+    spark-connector-spark-datamesh-demo.apps.rosa-8grhg.ssnp.p1.openshiftapps.com
+  to:
+    kind: Service
+    name: spark-master
+    weight: 100
+  port:
+    targetPort: spark-connector-ui
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: None
+  wildcardPolicy: None
+status:
+  ingress:
+    - host: >-
+        spark-connector-spark-datamesh-demo.apps.rosa-8grhg.ssnp.p1.openshiftapps.com
+      routerName: default
+      conditions:
+        - type: Admitted
+          status: 'True'
+          lastTransitionTime: '2024-06-08T21:06:03Z'
+      wildcardPolicy: None
+      routerCanonicalHostname: router-default.apps.rosa-8grhg.ssnp.p1.openshiftapps.com

@@ -1,0 +1,108 @@
+﻿kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: dataproduct-notebook
+  namespace: datamesh-demo
+  uid: 8cfe841c-6d57-4b2e-964f-0314cd702fdc
+  resourceVersion: '281876369'
+  generation: 19
+  creationTimestamp: '2024-06-02T02:49:48Z'
+  labels:
+    app: dataproduct-notebook
+  annotations:
+    deployment.kubernetes.io/revision: '17'
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dataproduct-notebook
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: dataproduct-notebook
+        deployment: dataproduct-notebook
+      annotations:
+        openshift.openshift.io/restartedAt: '2024-11-08T18:49:48.213Z'
+    spec:
+      volumes:
+        - name: data
+          emptyDir: {}
+        - name: spark-config
+          configMap:
+            name: spark-default-config
+            defaultMode: 420
+        - name: workspace
+          persistentVolumeClaim:
+            claimName: dataproductworkspace
+      containers:
+        - resources:
+            limits:
+              cpu: '3'
+              memory: 4Gi
+            requests:
+              cpu: '2'
+              memory: 4Gi
+          terminationMessagePath: /dev/termination-log
+          name: dataproduct-notebook
+          env:
+            - name: AWS_ACCESS_KEY_ID
+              value: minioAdmin
+            - name: AWS_SECRET_ACCESS_KEY
+              value: minio1234
+            - name: AWS_REGION
+              value: us-east-1
+            - name: DISABLE_CERT_CHECKING_SYSTEM_PROPERTY
+              value: 'true'
+          ports:
+            - containerPort: 4040
+              protocol: TCP
+            - containerPort: 4041
+              protocol: TCP
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: data
+              mountPath: /.local
+            - name: data
+              mountPath: /.jupyter
+            - name: workspace
+              mountPath: /.ssh
+            - name: workspace
+              mountPath: /workspace
+            - name: spark-config
+              mountPath: /opt/spark/conf
+          terminationMessagePolicy: File
+          image: 'quay.io/osclimate/pyspark-standalone:2.2'
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      imagePullSecrets:
+        - name: oscliamte-imagepullsec
+        - name: oscliamte-imagepullsec
+      schedulerName: default-scheduler
+  strategy:
+    type: Recreate
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
+status:
+  observedGeneration: 19
+  replicas: 1
+  updatedReplicas: 1
+  readyReplicas: 1
+  availableReplicas: 1
+  conditions:
+    - type: Progressing
+      status: 'True'
+      lastUpdateTime: '2024-11-08T18:49:48Z'
+      lastTransitionTime: '2024-06-02T02:49:48Z'
+      reason: NewReplicaSetAvailable
+      message: >-
+        ReplicaSet "dataproduct-notebook-857f4b6767" has successfully
+        progressed.
+    - type: Available
+      status: 'True'
+      lastUpdateTime: '2024-11-08T18:53:00Z'
+      lastTransitionTime: '2024-11-08T18:53:00Z'
+      reason: MinimumReplicasAvailable
+      message: Deployment has minimum availability.

@@ -1,0 +1,56 @@
+﻿kind: Service
+apiVersion: v1
+metadata:
+  name: spark-history
+  namespace: spark-datamesh-demo
+  uid: 21ed7948-d8af-4ae9-8de9-d57ddf24e99b
+  resourceVersion: '69405266'
+  creationTimestamp: '2024-05-31T22:30:12Z'
+  labels:
+    app: spark
+    component: history
+  managedFields:
+    - manager: Mozilla
+      operation: Update
+      apiVersion: v1
+      time: '2024-05-31T22:30:12Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:labels':
+            .: {}
+            'f:app': {}
+            'f:component': {}
+        'f:spec':
+          'f:internalTrafficPolicy': {}
+          'f:ports':
+            .: {}
+            'k:{"port":18080,"protocol":"TCP"}':
+              .: {}
+              'f:name': {}
+              'f:port': {}
+              'f:protocol': {}
+              'f:targetPort': {}
+          'f:selector': {}
+          'f:sessionAffinity': {}
+          'f:type': {}
+spec:
+  clusterIP: 172.30.7.28
+  ipFamilies:
+    - IPv4
+  ports:
+    - name: spark-history-webui
+      protocol: TCP
+      port: 18080
+      targetPort: 18080
+  internalTrafficPolicy: Cluster
+  clusterIPs:
+    - 172.30.7.28
+  type: ClusterIP
+  ipFamilyPolicy: SingleStack
+  sessionAffinity: None
+  selector:
+    app: spark
+    component: history
+status:
+  loadBalancer: {}

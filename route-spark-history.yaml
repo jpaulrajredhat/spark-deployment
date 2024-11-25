@@ -1,0 +1,70 @@
+﻿kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: spark-history
+  namespace: spark-datamesh-demo
+  uid: c4c6ec99-cab3-4b46-928f-b24f4d86b4e0
+  resourceVersion: '69406053'
+  creationTimestamp: '2024-05-31T22:31:11Z'
+  labels:
+    app: spark
+    component: history
+  annotations:
+    openshift.io/host.generated: 'true'
+  managedFields:
+    - manager: Mozilla
+      operation: Update
+      apiVersion: route.openshift.io/v1
+      time: '2024-05-31T22:31:11Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:labels':
+            .: {}
+            'f:app': {}
+            'f:component': {}
+        'f:spec':
+          'f:port':
+            .: {}
+            'f:targetPort': {}
+          'f:tls':
+            .: {}
+            'f:insecureEdgeTerminationPolicy': {}
+            'f:termination': {}
+          'f:to':
+            'f:kind': {}
+            'f:name': {}
+            'f:weight': {}
+          'f:wildcardPolicy': {}
+    - manager: openshift-router
+      operation: Update
+      apiVersion: route.openshift.io/v1
+      time: '2024-05-31T22:31:11Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:status':
+          'f:ingress': {}
+      subresource: status
+spec:
+  host: spark-history-spark-datamesh-demo.apps.rosa-8grhg.ssnp.p1.openshiftapps.com
+  to:
+    kind: Service
+    name: spark-history
+    weight: 100
+  port:
+    targetPort: spark-history-webui
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: None
+  wildcardPolicy: None
+status:
+  ingress:
+    - host: >-
+        spark-history-spark-datamesh-demo.apps.rosa-8grhg.ssnp.p1.openshiftapps.com
+      routerName: default
+      conditions:
+        - type: Admitted
+          status: 'True'
+          lastTransitionTime: '2024-05-31T22:31:11Z'
+      wildcardPolicy: None
+      routerCanonicalHostname: router-default.apps.rosa-8grhg.ssnp.p1.openshiftapps.com
